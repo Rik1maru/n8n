@@ -1,13 +1,8 @@
-// As JSON is a data only format, comments are not allowed in JSON files. Remember to remove them before using the JSON in n8n.
-// This is a sample workflow for extracting data from a PDF file using n8n and Google Gemini 2.0 Flash.
-// The workflow uses the HTTP Request node to fetch the PDF file, the HTML node to extract the content, and the Gemini 2.0 Flash node to process the data.
-// The workflow is designed to be run in n8n, a powerful open-source workflow automation tool.
-
 {
   "nodes": [
     {
       "parameters": {
-        "url": "URL", // Example - Remember to replace URL with the full url you want to use in your query
+        "url": "URL",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -26,7 +21,7 @@
           "values": [
             {
               "key": "URL",
-              "cssSelector": "#ContentPlaceHolder1_repGroups_panItemVisibility_11 > div.document-list__items a", // Example - Remember to find the correct selector for your usecase.
+              "cssSelector": "#ContentPlaceHolder1_repGroups_panItemVisibility_11 > div.document-list__items a",
               "returnValue": "attribute",
               "attribute": "href",
               "returnArray": true
@@ -50,7 +45,7 @@
     },
     {
       "parameters": {
-        "url": "=URL{ $json.URL[0] }}", // Example - Remember to replace URL with the base url in your query
+        "url": "=URL{ $json.URL[0] }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -81,7 +76,7 @@
     {
       "parameters": {
         "operation": "write",
-        "fileName": "=/path/to-folder{{$binary.data.fileName }}", // Example - remember to enter full path to the folder where you want to save the file
+        "fileName": "=/path/to-folder{{$binary.data.fileName }}",
         "options": {}
       },
       "type": "n8n-nodes-base.readWriteFile",
